@@ -13,7 +13,8 @@
     height:50%;
     position:absolute;
     top:12%;
-    overflow:hidden;
+    overflow-y:hidden;
+    overflow-x:hidden;
     left:7.5%;
     font-size: 0.6vw;
     background-color: #C4C4C4;
@@ -23,7 +24,7 @@
 }
 
 #walkman select:hover{
-    overflow-y: auto;
+    
 }
 
 #walkman select::-webkit-scrollbar {
