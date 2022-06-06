@@ -24,7 +24,7 @@
 }
 
 #walkman select:hover{
-    
+    overflow-y:auto;
 }
 
 #walkman select::-webkit-scrollbar {
