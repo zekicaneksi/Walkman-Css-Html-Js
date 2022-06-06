@@ -4,7 +4,7 @@
     
     <body onload="setUp()">
         <div id="walkman" class="hover-glow glow" style="cursor: default;">
-            <select id="SongsSelect" name="Songs" size="4" onchange="(() => {if(index!=document.getElementById('SongsSelect').selectedIndex)setWalkmanButton('play'); else {if(isSongPlaying)setWalkmanButton('pause');else setWalkmanButton('play');}})()">
+            <select id="SongsSelect" name="Songs" onchange="(() => {if(index!=document.getElementById('SongsSelect').selectedIndex)setWalkmanButton('play'); else {if(isSongPlaying)setWalkmanButton('pause');else setWalkmanButton('play');}})()">
             </select>
             <button onclick="playback()" class="hover-glow">
             <div class="playShape"></div>
@@ -35,6 +35,7 @@
             select.options.add(new Option('Loneliness of the Winner', 'Loneliness of the Winner'));
             select.options.add(new Option('Forest Lullaby', 'Forest Lullaby'));
             select.options.add(new Option('Anthem of Victory', 'Anthem of Victory'));
+            select.setAttribute('size',"4");
 
         }
 
