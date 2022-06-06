@@ -1,0 +1,95 @@
+#walkman{
+    height:22%;
+    width:5%;
+    background-color: #989292;
+    position:absolute;
+    top:12%;
+    right:28%;
+    border-radius: 10%;
+}
+
+#walkman select{
+    width:85%;
+    height:50%;
+    position:absolute;
+    top:12%;
+    overflow:hidden;
+    left:7.5%;
+    font-size: 0.6vw;
+    background-color: #C4C4C4;
+    padding:3%;
+    outline: none;
+    cursor: pointer;
+}
+
+#walkman select option:checked{
+    background-color: #C4C4C4;
+}
+
+@keyframes slide {
+    to{
+         transform: translate(-100%);
+    }
+}
+
+.slide{
+    animation: slide 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    -webkit-animation: slide 3s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+}
+
+#walkman button{
+    border-radius: 50%;
+    width:45%;
+    height:25%;
+    position:absolute;
+    top:64%;
+    left:26%;
+}
+
+.slider{
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    border-radius: 25%;;
+    width:75%;
+    height: 3.5%;
+    background-color: #6e6e6e;
+    position:absolute;
+    top:90%;
+    left:12.5%;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0.6vw;
+    height: 0.6vw;
+    background: #4b6992;
+    cursor: pointer;
+    border-radius: 40%;
+}
+
+.playShape{
+    height: 70%;
+    width: 50%;
+    position:absolute;
+    left:32%;
+    top:15%;
+    clip-path: polygon(100% 50%, 0 0, 0 100%);
+    -webkit-clip-path: polygon(100% 50%, 0 0, 0 100%);
+    background-color: #676464;
+}
+
+.pauseShape{
+    height: 60%;
+    width: 45%;
+    border-right: 0.3vw solid #676464;
+    border-left: 0.3vw solid #676464;
+    box-sizing: border-box;
+    position:absolute;
+    top:20%;
+    left:30%;
+}

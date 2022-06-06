@@ -1,0 +1,162 @@
+    <head>
+        <link rel="stylesheet" href="walkman.css">
+    </head>
+    
+    <body onload="setUp()">
+        <div id="walkman" class="hover-glow glow" style="cursor: default;">
+            <select id="SongsSelect" name="Songs" size="4" onchange="(() => {if(index!=document.getElementById('SongsSelect').selectedIndex)setWalkmanButton('play'); else {if(isSongPlaying)setWalkmanButton('pause');else setWalkmanButton('play');}})()">
+            </select>
+            <button onclick="playback()" class="hover-glow">
+            <div class="playShape"></div>
+            <div class="pauseShape" hidden></div>
+            </button>
+            <input id="volumeSlider" type="range" min="0" max="100" value="50" class="slider" oninput="(() => {if(gainNode!=undefined)gainNode.gain.setValueAtTime(document.getElementById('volumeSlider').value / 100, ctx.currentTime);})()">
+        </div>
+    </body>
+
+    <script>
+
+        let ctx;
+        let audioUrl=[];
+        let audio=[];
+        let gainNode;
+        let index;
+        let isSongPlaying = false;
+
+        function setUp(){
+            audioUrl=[
+                'https://raw.githubusercontent.com/zekicaneksi/Walkman-Css-Html-Js/main/winning-elevation-111355.mp3',
+                'https://raw.githubusercontent.com/zekicaneksi/Walkman-Css-Html-Js/main/loneliness-of-the-winner-110416.mp3',
+                'https://raw.githubusercontent.com/zekicaneksi/Walkman-Css-Html-Js/main/forest-lullaby-110624.mp3',
+                'https://raw.githubusercontent.com/zekicaneksi/Walkman-Css-Html-Js/main/anthem-of-victory-111206.mp3'
+            ];
+            let select = document.getElementById('SongsSelect');
+            select.options.add(new Option('Winning Elevation', 'Winning Elevation'));
+            select.options.add(new Option('Loneliness of the Winner', 'Loneliness of the Winner'));
+            select.options.add(new Option('Forest Lullaby', 'Forest Lullaby'));
+            select.options.add(new Option('Anthem of Victory', 'Anthem of Victory'));
+
+        }
+
+        async function playback() {
+
+        let SongsSelect = document.getElementById("SongsSelect");
+        if(index==SongsSelect.selectedIndex){
+            if(document.getElementById('walkman').getElementsByTagName('div')[0].style.display=="none"){
+            ctx.suspend();
+            isSongPlaying=false;
+            setWalkmanButton('play');
+            }
+            else{
+            ctx.resume();
+            isSongPlaying=true;
+            setWalkmanButton('pause');
+            }
+            return;
+        }
+
+        SongsSelect.disabled=true;
+
+        let walkmanButton = document.getElementById('walkman').getElementsByTagName('button')[0];
+        walkmanButton.disabled = true;
+
+        let holdElement = document.getElementsByClassName('slide')[0];
+        if(holdElement!=undefined)
+            holdElement.classList.remove('slide');
+
+        if(ctx!=undefined){
+            await ctx.close();
+        }
+
+        ctx = new AudioContext();
+
+        let url;
+
+        if(SongsSelect.selectedIndex == -1){
+            url=audioUrl[0];
+            SongsSelect.selectedIndex=0;
+            index=0;
+        }
+        else{
+            index = SongsSelect.selectedIndex;
+            url = audioUrl[index];
+        }
+
+        if(audio[index] == undefined){
+            await fetch(url)
+            .then(data => data.arrayBuffer())
+            .then(arrayBuffer => ctx.decodeAudioData(arrayBuffer))
+            .then(decodeAudioData => {
+                audio[index] = decodeAudioData;
+            });
+        }
+
+        gainNode = ctx.createGain();
+        let bufferSource = ctx.createBufferSource();
+        bufferSource.buffer = audio[index];
+        bufferSource.addEventListener('ended', onSongEnd);
+        bufferSource.connect(gainNode);
+        gainNode.connect(ctx.destination);
+        gainNode.gain.setValueAtTime(document.getElementById('volumeSlider').value / 100, ctx.currentTime);
+        bufferSource.start(ctx.currentTime);
+        isSongPlaying=true;
+
+        document.getElementById("SongsSelect").getElementsByTagName("option")[index].classList.add('slide');
+        walkmanButton.disabled = false;
+        setWalkmanButton('toggle');
+        SongsSelect.disabled = false;
+        }
+
+        async function onSongEnd(){
+        let walkmanButton = document.getElementById('walkman').getElementsByTagName('button')[0];
+        walkmanButton.disabled = true;
+        setWalkmanButton('play');
+        await ctx.close();
+        ctx = new AudioContext();
+        
+        gainNode = ctx.createGain();
+        let bufferSource = ctx.createBufferSource();
+        bufferSource.buffer = audio[index];
+        bufferSource.addEventListener('ended', onSongEnd);
+        bufferSource.connect(gainNode);
+        gainNode.connect(ctx.destination);
+        gainNode.gain.setValueAtTime(document.getElementById('volumeSlider').value / 100, ctx.currentTime);
+        bufferSource.start(ctx.currentTime);
+
+        ctx.suspend();
+        isSongPlaying=false;
+        walkmanButton.disabled = false;
+        }
+
+        function setWalkmanButton(option){
+
+        let playButton = document.getElementById('walkman').getElementsByTagName('div')[0];
+        let stopButton = document.getElementById('walkman').getElementsByTagName('div')[1];
+
+        switch (option) {
+            case 'toggle':
+            if (playButton.style.diplay == "none") {
+                stopButton.style.display = "none";
+                playButton.style.display = "block"
+            }
+            else {
+                playButton.style.display = "none";
+                stopButton.style.display = "block"
+            }
+            break;
+            case 'play':
+            stopButton.style.display = "none";
+            playButton.style.display = "block"
+            break;
+            case 'pause':
+            playButton.style.display = "none";
+            stopButton.style.display = "block"
+            break;
+            default:
+            break;
+        }
+        
+        
+        }
+
+    </script>
