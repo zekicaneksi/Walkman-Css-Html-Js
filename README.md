@@ -9,7 +9,7 @@ You can just copy paste the code and use it. All you need to do is;
 ```
         <link rel="stylesheet" href="https://raw.githubusercontent.com/zekicaneksi/Walkman-Css-Html-Js/main/walkman.css">
 ```
-- change the setUp() function which arranges the audio urls and dynamically adds option tags to the select tag;<br></br> (And also, obviously call this function sometime to intialize the walkman.)
+- change the setUp() function which arranges the audio urls and dynamically adds option tags to the select tag. also, sets the size of the select element;<br></br> (And also, obviously call this function sometime to intialize the walkman.)
 ```
         function setUp(){
             audioUrl=[
@@ -23,6 +23,7 @@ You can just copy paste the code and use it. All you need to do is;
             select.options.add(new Option('Loneliness of the Winner', 'Loneliness of the Winner'));
             select.options.add(new Option('Forest Lullaby', 'Forest Lullaby'));
             select.options.add(new Option('Anthem of Victory', 'Anthem of Victory'));
+            select.setAttribute('size','4');
 
         }
 ```
