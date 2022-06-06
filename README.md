@@ -26,6 +26,7 @@ You can just copy paste the code and use it. All you need to do is;
 
         }
 ```
+- and lastly, change the walkman's positioning values in the stylesheet.
 
 The code doesn't have many lines, and i tried to name everything properly.
 So, you can just edit the javascript code and html a little bit, and change the css entirely to make it look better (that is if you think you can...).
