@@ -1,6 +1,6 @@
 #walkman{
     height:22%;
-    width:5%;
+    width:6%;
     background-color: #989292;
     position:absolute;
     top:12%;
@@ -21,6 +21,29 @@
     outline: none;
     cursor: pointer;
 }
+
+#walkman select:hover{
+    overflow-y: scroll;
+}
+
+#walkman select::-webkit-scrollbar {
+    width: 0.5vw;
+  }
+  
+  /* Track */
+#walkman select::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+#walkman select::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+#walkman select::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
 
 #walkman select option:checked{
     background-color: #C4C4C4;
