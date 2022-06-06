@@ -23,7 +23,7 @@
 }
 
 #walkman select:hover{
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 #walkman select::-webkit-scrollbar {
