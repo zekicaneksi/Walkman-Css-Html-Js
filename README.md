@@ -1,8 +1,12 @@
 # Walkman-Css-Html-Js
 Using the Web Audio API, i created a Walkman music player. The code most likely doesn't use the best practices and instead bad practices, also the code isn't elegant. But it works and doesn't cause any bugs (so far, it didn't anyways).
 
-For live demo; https://htmlpreview.github.io/?https://github.com/zekicaneksi/Walkman-Css-Html-Js/blob/main/walkman.html
+![image](https://user-images.githubusercontent.com/59491631/173868928-045d375d-aae5-4fc0-9cd5-eab3d3901710.png)
 
+### For live demo;
+https://htmlpreview.github.io/?https://github.com/zekicaneksi/Walkman-Css-Html-Js/blob/main/walkman.html
+
+### How to Implement
 
 You can just copy paste the code and use it. All you need to do is;
 - change the stylesheet link href attribute.
